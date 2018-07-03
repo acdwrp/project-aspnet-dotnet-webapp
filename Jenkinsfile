@@ -11,7 +11,7 @@ pipeline {
   stages {
     
     
-    stage('Build1') {
+    stage('Build') {
               steps {
                 
                 bat 'nuget restore SampleWebApplication.sln'
