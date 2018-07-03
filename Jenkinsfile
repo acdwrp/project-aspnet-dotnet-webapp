@@ -3,7 +3,7 @@ pipeline {
   
   agent any {
     node {
-      customWorkspace '/some/other/path'
+      customWorkspace "ws\\${JOB_NAME.replace("%2F", "_")}"
     }
   }
   
