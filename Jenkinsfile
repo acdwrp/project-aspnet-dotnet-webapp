@@ -1,5 +1,13 @@
 pipeline {
-  agent any
+  
+  
+  agent any {
+    node {
+      customWorkspace '/some/other/path'
+    }
+  }
+  
+  
   stages {
     
     
