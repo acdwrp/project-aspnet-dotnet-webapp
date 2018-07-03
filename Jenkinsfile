@@ -1,7 +1,7 @@
 pipeline {
   agent any
-  node {
-    customWorkspace "ws\\${JOB_NAME.replace("%2F", "_")}"
+
+ 
     
       stages {
         stage('Build1') {
@@ -12,5 +12,5 @@ pipeline {
             }
          }
       }
-  }
+  
 }
