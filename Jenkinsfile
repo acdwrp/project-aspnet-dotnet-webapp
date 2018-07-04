@@ -25,7 +25,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying....'
-        archiveArtifacts(artifacts: 'bin/**', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'bin/*.*', onlyIfSuccessful: true)
       }
     }
   }
