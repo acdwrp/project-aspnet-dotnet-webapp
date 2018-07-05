@@ -34,6 +34,10 @@ pipeline {
       }
       steps {
         echo 'Uploading package to S3....'
+        dir("Deployment"){
+          unstash name: StashedPackage
+        }
+        
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment')
         }
