@@ -36,14 +36,17 @@ pipeline {
         AWSCredentials = 'AWSCredentials'
       }
       steps {
+        
+        try {
+                  
+              } catch (err) {
+                 
+              }
+        
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
-              try {
                   s3Upload(file: ZipPackageName, bucket: '1test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
-              } catch (err) {
-                  sleep(time: 10, unit: 'SECONDS')
-              }
             }
 
           }
