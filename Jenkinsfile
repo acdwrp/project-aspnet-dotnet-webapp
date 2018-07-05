@@ -25,7 +25,7 @@ pipeline {
     stage('Package Artifacts') {
       steps {
         zip(glob: '/SampleWebApplication/bin/*.*', zipFile: ZipPackageName)
-        echo "${workspace}/${ZipPackageName}"
+        stash includes: ZipPackageName
       }
     }
     stage('Deploy') {
