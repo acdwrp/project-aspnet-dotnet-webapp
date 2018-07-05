@@ -47,21 +47,19 @@ pipeline {
       }
     }
   }
-  post
-  {
-    failure {
-      mail(from: "bob@example.com", 
-           to: "steve@example.com", 
-           subject: "That build failed!", 
-           body: "Nothing to see here")
-}
-  }
   environment {
     AWSBucket = 'test.axioma.internal.depolyment'
     AWSCredentials = 'AWSCredentials'
     StashedPackage = 'Package'
     ZipPackageName = 'package.zip'
     WorkspaceName = JOB_NAME.replace("%2F", "_")
+  }
+  post {
+    failure {
+      mail(from: 'bob@example.com', to: 'steve@example.com', subject: 'That build failed!', body: 'Nothing to see here')
+
+    }
+
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
