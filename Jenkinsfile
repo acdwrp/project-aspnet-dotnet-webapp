@@ -32,7 +32,7 @@ pipeline {
           def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
           files.each {println "RPM:  ${it}"}
 
-          withAWS(credentials:'AWSCredentials')
+          withAWS(credentials:'AWSCredentials', region: 'eu-west-1')
           {
             s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
           }
