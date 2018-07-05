@@ -28,7 +28,7 @@ pipeline {
         archiveArtifacts(artifacts: ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
-    stage('Deploy') {
+    stage('Push to artifact storage') {
       when {
         branch 'master'
       }
@@ -39,7 +39,11 @@ pipeline {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
-              s3Upload(file: ZipPackageName, bucket: '1test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
+              try {
+                  s3Upload(file: ZipPackageName, bucket: '1test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
+              } catch (err) {
+                  sleep(time: 10, unit: 'SECONDS')
+              }
             }
 
           }
