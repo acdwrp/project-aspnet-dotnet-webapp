@@ -39,7 +39,7 @@ pipeline {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
-                  s3Upload(file: ZipPackageName, bucket: '1test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
+              s3Upload(file: ZipPackageName, bucket: '1test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
             }
 
           }
