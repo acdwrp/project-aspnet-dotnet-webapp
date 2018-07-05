@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.email } }.unique()
+          def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
           authors.each {println "RPM:  ${it}"}
         }
 
