@@ -23,12 +23,10 @@ pipeline {
       }
     }
     stage('Deploy') {
-      
-       environment {
-        ZipName = "package.zip"
-        AWSCredentials = "AWSCredentials"
-    }
-      
+      environment {
+        ZipName = 'package.zip'
+        AWSCredentials = 'AWSCredentials'
+      }
       steps {
         echo 'Creating package....'
         zip(glob: "${workspace}/SampleWebApplication/bin/*.*", zipFile: ZipName)
