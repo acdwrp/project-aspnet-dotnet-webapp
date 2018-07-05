@@ -9,6 +9,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        
+        script
+        {
+          def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
+          authors.each {println "RPM:  ${it}"}
+        }
+        
         bat 'nuget restore SampleWebApplication.sln'
         bat "\"${tool 'MSBuild'}\" SampleWebApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
