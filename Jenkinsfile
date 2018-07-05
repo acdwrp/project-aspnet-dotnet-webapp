@@ -1,8 +1,4 @@
 pipeline {
-  environment {
-        StashedPackage = 'Package'
-        ZipPackageName = 'package.zip'
-      }
   agent {
     node {
       label 'win'&&'slave'
@@ -26,13 +22,11 @@ pipeline {
         echo 'Testing..'
       }
     }
-    stage('Package Artifacts'){
-      steps{
+    stage('Package Artifacts') {
+      steps {
         zip(glob: "${workspace}/SampleWebApplication/bin/*.*", zipFile: ZipPackageName)
-        
         echo "${workspace}/${ZipPackageName}"
-        
-        stash includes: "${workspace}/${ZipPackageName}", name: StashedPackage
+        stash(includes: "${workspace}/${ZipPackageName}", name: StashedPackage)
       }
     }
     stage('Deploy') {
@@ -41,7 +35,6 @@ pipeline {
       }
       steps {
         echo 'Creating package....'
-        
         echo 'Uploading package to S3....'
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment')
@@ -55,5 +48,9 @@ pipeline {
         archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
       }
     }
+  }
+  environment {
+    StashedPackage = 'Package'
+    ZipPackageName = 'package.zip'
   }
 }
