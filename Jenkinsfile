@@ -30,7 +30,7 @@ pipeline {
         
         script
         {
-          files = findFiles(glob: 'SampleWebApplication/bin/*.*')
+          def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
 
           files.each {println "RPM:  ${it}"}}
         
