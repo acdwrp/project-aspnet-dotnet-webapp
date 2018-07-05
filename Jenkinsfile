@@ -29,12 +29,15 @@ pipeline {
       }
     }
     stage('Deploy') {
+      when {
+			   branch "master"
+			}
       environment {
         AWSCredentials = 'AWSCredentials'
       }
       steps {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
-          s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment')
+          s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment', path:"${ProjectName}/${BRANCH_NAME}")
         }
 
         script {
@@ -48,5 +51,6 @@ pipeline {
   environment {
     StashedPackage = 'Package'
     ZipPackageName = 'package.zip'
+    ProjectName = JOB_NAME.replace("%2F", "_")
   }
 }
