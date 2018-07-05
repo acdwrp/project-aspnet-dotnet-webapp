@@ -10,7 +10,6 @@ pipeline {
     stage('Build') {
       steps {
         call()
-
         bat 'nuget restore SampleWebApplication.sln'
         bat "\"${tool 'MSBuild'}\" SampleWebApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
@@ -55,9 +54,4 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     timeout(time: 20, unit: 'MINUTES')
   }
-}
-
-def call() {
-    def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
-          authors.each {println "RPM:  ${it}"}
 }
