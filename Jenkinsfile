@@ -26,7 +26,6 @@ pipeline {
       steps {
         zip(glob: "${workspace}/SampleWebApplication/bin/*.*", zipFile: ZipPackageName)
         echo "${workspace}/${ZipPackageName}"
-        //stash(includes: "${workspace}/${ZipPackageName}", name: StashedPackage)
       }
     }
     stage('Deploy') {
