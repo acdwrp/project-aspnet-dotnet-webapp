@@ -32,6 +32,9 @@ pipeline {
 
           files.each {println "RPM:  ${it}"}
           
+          zip glob:'SampleWebApplication/bin/*.*' zipFile: 'test.zip'
+         
+          
           
           withAWS(credentials:'AWSCredentials') 
           {
