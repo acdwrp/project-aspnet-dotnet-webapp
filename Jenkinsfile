@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
-        zip(glob: 'SampleWebApplication/bin/*.*', zipFile: ZipPackageName)
+        zip(glob: "${ProjectName}/${BRANCH_NAME}/SampleWebApplication/bin/*.*", zipFile: ZipPackageName)
         archiveArtifacts(artifacts: ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
