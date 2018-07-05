@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
-        zip(glob: '/SampleWebApplication/bin/*.*', zipFile: ZipPackageName)
+        zip(glob: ArtifactsToPack, zipFile: ZipPackageName)
         archiveArtifacts(artifacts: ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
@@ -54,6 +54,7 @@ pipeline {
     ZipPackageName = 'package.zip'
     WorkspaceName = JOB_NAME.replace("%2F", "_")
     SolutionName = 'SampleWebApplication.sln'
+    ArtifactsToPack = '/SampleWebApplication/bin/*.*'
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
