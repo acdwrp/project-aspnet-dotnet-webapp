@@ -47,6 +47,15 @@ pipeline {
       }
     }
   }
+  post
+  {
+    failure {
+      mail(from: "bob@example.com", 
+           to: "steve@example.com", 
+           subject: "That build failed!", 
+           body: "Nothing to see here")
+}
+  }
   environment {
     AWSBucket = 'test.axioma.internal.depolyment'
     AWSCredentials = 'AWSCredentials'
