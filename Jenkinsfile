@@ -25,7 +25,7 @@ pipeline {
     stage('Package Artifacts') {
       steps {
         zip(glob: '/SampleWebApplication/bin/*.*', zipFile: ZipPackageName)
-        stash(name: StashedPackage, includes: ZipPackageName)
+        archiveArtifacts(artifacts: ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
     stage('Deploy') {
@@ -33,11 +33,6 @@ pipeline {
         AWSCredentials = 'AWSCredentials'
       }
       steps {
-        echo 'Uploading package to S3....'
-        dir(path: 'Deployment') {
-          unstash StashedPackage
-        }
-
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment')
         }
@@ -47,7 +42,7 @@ pipeline {
           files.each {println "RPM:  ${it}"}
         }
 
-        archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
+        
       }
     }
   }
