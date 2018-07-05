@@ -34,7 +34,6 @@ pipeline {
         AWSCredentials = 'AWSCredentials'
       }
       steps {
-        
         echo 'Uploading package to S3....'
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment')
