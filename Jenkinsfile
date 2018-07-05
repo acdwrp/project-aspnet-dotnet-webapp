@@ -39,6 +39,11 @@ pipeline {
           }
           
         }
+        
+        withAWS(credentials:'AWSCredentials') 
+          {
+               s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
+          }
 
         archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
       }
