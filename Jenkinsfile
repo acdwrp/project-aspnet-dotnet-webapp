@@ -25,7 +25,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Creating package....'
-        zip(dir: "${workspace}/SampleWebApplication/bin/*.*", zipFile: 't.zip')
+        zip(glob: "${workspace}/SampleWebApplication/bin/*.*", zipFile: 't.zip')
         echo 'Uploading package to S3....'
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: 't.zip', bucket: 'test.axioma.internal.depolyment')
