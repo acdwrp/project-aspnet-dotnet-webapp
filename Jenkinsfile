@@ -2,7 +2,7 @@ pipeline {
   agent {
     node {
       label 'win'&&'slave'
-      customWorkspace "workspace\\${env.ProjectName}"
+      customWorkspace "workspace\\${JOB_NAME.replace("%2F", "_")}"
     }
 
   }
