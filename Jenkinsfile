@@ -25,16 +25,15 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying....'
-        archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
-
-        
-        script
-        {
+        script {
           def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
 
-          files.each {println "RPM:  ${it}"}}
-        
-        
+
+
+          files.each {println "RPM:  ${it}"}
+        }
+
+        archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
       }
     }
   }
