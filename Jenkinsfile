@@ -14,8 +14,8 @@ pipeline {
           authors.each {println "RPM:  ${it}"}
         }
 
-        bat 'nuget restore SampleWebApplication.sln'
-        bat "\"${tool 'MSBuild'}\" SampleWebApplication.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+        bat "nuget restore ${SolutionName}"
+        bat "\"${tool 'MSBuild'}\" ${SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
     stage('Test') {
@@ -53,6 +53,7 @@ pipeline {
     StashedPackage = 'Package'
     ZipPackageName = 'package.zip'
     WorkspaceName = JOB_NAME.replace("%2F", "_")
+    SolutionName = 'SampleWebApplication.sln'
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
