@@ -25,16 +25,12 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying....'
+        
+        zip glob:'SampleWebApplication/bin/*.*', zipFile: 'test.zip'
+        
         script {
           def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
-
-
-
           files.each {println "RPM:  ${it}"}
-          
-          zip glob:'SampleWebApplication/bin/*.*', zipFile: 'test.zip'
-         
-          
           
           withAWS(credentials:'AWSCredentials') 
           {
