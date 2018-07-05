@@ -34,12 +34,12 @@ pipeline {
 
           withAWS(credentials:'AWSCredentials', region: 'eu-west-1')
           {
-            s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
+            s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'Sample', force:true)
           }
         }
 
-        withAWS(credentials: 'AWSCredentials') {
-          s3Download(file: 'sample', bucket: 'test.axioma.internal.depolyment', path: 'sample', force: true)
+        withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
+          s3Download(file: 'sample', bucket: 'test.axioma.internal.depolyment', path: 'Sample', force: true)
         }
 
         archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
