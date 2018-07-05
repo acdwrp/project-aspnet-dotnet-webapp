@@ -36,13 +36,6 @@ pipeline {
         AWSCredentials = 'AWSCredentials'
       }
       steps {
-        
-        try {
-                  
-              } catch (err) {
-                 
-              }
-        
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
@@ -63,5 +56,6 @@ pipeline {
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+    timeout(time: 20, unit: 'MINUTES')
   }
 }
