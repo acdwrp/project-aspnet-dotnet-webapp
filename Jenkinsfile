@@ -32,7 +32,7 @@ pipeline {
 
           files.each {println "RPM:  ${it}"}
           
-          zip glob:'SampleWebApplication/bin/*.*' zipFile: 'test.zip'
+          zip glob:'SampleWebApplication/bin/*.*', zipFile: 'test.zip'
          
           
           
