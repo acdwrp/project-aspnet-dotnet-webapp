@@ -32,7 +32,7 @@ pipeline {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
-              s3Upload(file: ZipPackageName, bucket: AWSBucket, path: "${workspace}/${ZipPackageName}")
+              s3Upload(file: ZipPackageName, bucket: AWSBucket, path: "${WorkspaceName}/${ZipPackageName}")
             }
 
           }
@@ -47,6 +47,7 @@ pipeline {
     AWSCredentials = 'AWSCredentials'
     StashedPackage = 'Package'
     ZipPackageName = 'package.zip'
+    WorkspaceName = JOB_NAME.replace("%2F", "_")
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
