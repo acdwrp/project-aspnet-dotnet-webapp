@@ -25,27 +25,22 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying....'
-        
         echo "Reports directory: ${workspace}"
-zip dir: "${workspace}", zipFile: "t.zip" // Create a zip file of content in the workspace
-        
-        zip glob:'SampleWebApplication/bin/*.*', zipFile: 'test.zip'
-        
+        zip(dir: "${workspace}", zipFile: 't.zip')
+        zip(glob: 'SampleWebApplication/bin/*.*', zipFile: 'test.zip')
         script {
           def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
           files.each {println "RPM:  ${it}"}
-          
-          withAWS(credentials:'AWSCredentials') 
+
+          withAWS(credentials:'AWSCredentials')
           {
-               s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
+            s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
           }
-          
         }
-        
-        withAWS(credentials:'AWSCredentials') 
-          {
-               s3Download(file:'sample', bucket:'test.axioma.internal.depolyment', path:'sample', force:true)
-          }
+
+        withAWS(credentials: 'AWSCredentials') {
+          s3Download(file: 'sample', bucket: 'test.axioma.internal.depolyment', path: 'sample', force: true)
+        }
 
         archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
       }
