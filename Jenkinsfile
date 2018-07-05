@@ -42,7 +42,6 @@ pipeline {
           files.each {println "RPM:  ${it}"}
         }
 
-        
       }
     }
   }
