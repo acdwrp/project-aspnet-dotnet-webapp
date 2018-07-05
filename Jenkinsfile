@@ -2,7 +2,7 @@ pipeline {
   agent {
     node {
       label 'win'&&'slave'
-      customWorkspace "workspace\\${JOB_NAME.replace("%2F", "_")}"
+      customWorkspace "workspace\\${ProjectName}"
     }
 
   }
@@ -39,12 +39,6 @@ pipeline {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           s3Upload(file: ZipPackageName, bucket: 'test.axioma.internal.depolyment', path: "${ProjectName}/${BRANCH_NAME}/${ZipPackageName}")
         }
-
-        script {
-          def files = findFiles(glob: 'SampleWebApplication/bin/*.*')
-          files.each {println "RPM:  ${it}"}
-        }
-
       }
     }
   }
@@ -54,6 +48,6 @@ pipeline {
     ProjectName = JOB_NAME.replace("%2F", "_")
   }
   options {
-    buildDiscarder(logRotator(numToKeepStr: '10'))
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
   }
 }
