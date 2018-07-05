@@ -26,6 +26,15 @@ pipeline {
       steps {
         echo 'Deploying....'
         archiveArtifacts(artifacts: 'SampleWebApplication/*.*,SampleWebApplication/bin/*.*', onlyIfSuccessful: true, fingerprint: true)
+
+        
+        script
+        {
+          files = findFiles(glob: 'SampleWebApplication/bin/*.*')
+
+          files.each {println "RPM:  ${it}"}}
+        
+        
       }
     }
   }
