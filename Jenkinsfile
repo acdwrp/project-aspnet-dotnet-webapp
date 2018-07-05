@@ -1,7 +1,4 @@
 pipeline {
-  options {
-        buildDiscarder(logRotator(numToKeepStr:'10'))
-    }
   agent {
     node {
       label 'win'&&'slave'
@@ -55,5 +52,8 @@ pipeline {
     StashedPackage = 'Package'
     ZipPackageName = 'package.zip'
     ProjectName = JOB_NAME.replace("%2F", "_")
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 }
