@@ -26,6 +26,9 @@ pipeline {
       steps {
         echo 'Deploying....'
         
+        echo "Reports directory: ${workspace}"
+zip dir: "${workspace}", zipFile: "t.zip" // Create a zip file of content in the workspace
+        
         zip glob:'SampleWebApplication/bin/*.*', zipFile: 'test.zip'
         
         script {
