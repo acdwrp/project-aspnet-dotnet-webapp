@@ -24,8 +24,7 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
-        echo 'Creating package....'
-        zip(glob: "${workspace}/SampleWebApplication/bin/*.*", zipFile: 'package.zip')
+        zip(glob: "/SampleWebApplication/bin/*.*", zipFile: 'package.zip')
         echo "${workspace}/${ZipPackageName}"
       }
     }
