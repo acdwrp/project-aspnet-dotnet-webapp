@@ -48,16 +48,24 @@ pipeline {
     }
     stage('Deploy to Test')
     {
+steps{
 
+}
     }
     stage('Run smoke tests'){
-
+steps{
+  
+}
     }
     stage('Run API tests'){
-
+steps{
+  
+}
     }
     stage('Run stress tests'){
-
+steps{
+  
+}
     }
   }
   environment {
