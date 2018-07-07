@@ -38,6 +38,8 @@ echo "Test"
       }
       steps {
 
+        echo "DDD"
+
 deployToS3 file: ZipPackageName, bucket: AWSBucket, bucketPath: "${WorkspaceName}/${ZipPackageName}"
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
