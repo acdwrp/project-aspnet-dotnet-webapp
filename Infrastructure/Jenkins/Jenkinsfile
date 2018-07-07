@@ -10,12 +10,10 @@ pipeline {
     stage('Build') { 
       steps {
 
-        script{
-          DepolymentProperties = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
-        }
+        wnmp file: "AAA"
 
-        bat "nuget restore ${DepolymentProperties.SolutionName}"
-        bat "\"${tool 'MSBuild'}\" ${DepolymentProperties.SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+        bat "nuget restore ${DeploymentProperties.SolutionName}"
+        bat "\"${tool 'MSBuild'}\" ${DeploymentProperties.SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
     stage('Test') {
@@ -25,8 +23,8 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
-        zip(glob: DepolymentProperties.ArtifactsToPack, zipFile: DepolymentProperties.ZipPackageName)
-        archiveArtifacts(artifacts: DepolymentProperties.ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
+        zip(glob: DeploymentProperties.ArtifactsToPack, zipFile: DeploymentProperties.ZipPackageName)
+        archiveArtifacts(artifacts: DeploymentProperties.ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
     stage('Push to artifact storage') {
@@ -36,8 +34,6 @@ pipeline {
       steps {
 
         echo "DDD"
-
-        wnmp file: "AAA"
 
       }
     }
@@ -66,7 +62,7 @@ pipeline {
   environment {
     WorkspaceName = JOB_NAME.replace("%2F", "_")
     ABC = "WWW"
-    DepolymentProperties = ""
+    DeploymentProperties = "QQQ"
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
