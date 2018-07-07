@@ -40,7 +40,7 @@ echo "Test"
 
         echo "DDD"
 
-deployToS3 file: ZipPackageName, bucket: AWSBucket, bucketPath: "${WorkspaceName}/${ZipPackageName}"
+deployToS3 "AAA"
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
