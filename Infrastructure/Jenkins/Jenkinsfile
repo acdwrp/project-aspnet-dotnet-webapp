@@ -37,6 +37,9 @@ echo "Test"
         branch 'master'
       }
       steps {
+
+deployToS3 file: ZipPackageName, bucket: AWSBucket, bucketPath: "${WorkspaceName}/${ZipPackageName}"
+
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
             retry(count: 5) {
