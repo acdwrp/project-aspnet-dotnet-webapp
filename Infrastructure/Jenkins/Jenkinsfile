@@ -9,21 +9,23 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
-
-        buildDotNet()
-
+        script{
+          buildDotNet()
+        }
       }
     }
     stage('Test') {
       steps {
-        testDotNet()
+        script{
+          testDotNet()
+        }
       }
     }
     stage('Package Artifacts') {
       steps {
-
-        archivePackage()
-
+        script{
+          archivePackage()
+        }
       }
     }
     stage('Push to artifact storage') {
@@ -31,30 +33,39 @@ pipeline {
         branch 'master'
       }
       steps {
-
-        deployToS3()
+        script{
+          deployToS3()
+        }
 
       }
     }
     stage('Deploy to Test')
     {
         steps{
-          pushToEnvironment()
+          script{
+            pushToEnvironment()
+          }
         }
     }
     stage('Run smoke tests'){
         steps{
-          smokeTestEnvironment()
+          script{
+            smokeTestEnvironment()
+          }
         }
     }
     stage('Run API tests'){
       steps{
-        apiTestEnvironment()
+        script{
+          apiTestEnvironment()
+        }
       }
     }
     stage('Run stress tests'){
       steps{
-        stressTestEnvironment()
+        script{
+          stressTestEnvironment()
+        }
       }
     }
   }
