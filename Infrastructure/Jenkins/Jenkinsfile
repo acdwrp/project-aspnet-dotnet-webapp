@@ -91,6 +91,7 @@ steps{
     WorkspaceName = JOB_NAME.replace("%2F", "_")
     SolutionName = 'SampleWebApplication.sln'
     ArtifactsToPack = '/SampleWebApplication/bin/*.*'
+    DepolymentProperties = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
