@@ -10,9 +10,8 @@ pipeline {
     stage('Build') { 
       steps {
         
-
         script{
-          DeploymentProperties = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
+          DeploymentProperties = readJSON file: ConfigLocation
         }
 
         bat "nuget restore ${DeploymentProperties.SolutionName}"
@@ -65,6 +64,7 @@ pipeline {
   environment {
     WorkspaceName = JOB_NAME.replace("%2F", "_")
     ABC = "WWW"
+    ConfigLocation = "Infrastructure/Jenkins/DeploymentConfig.json"
     DeploymentProperties = "QQQ"
   }
   options {
