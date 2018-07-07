@@ -10,6 +10,8 @@ pipeline {
     stage('Build') { 
       steps {
 
+
+echo "A"
         wnmp
         
         script{
