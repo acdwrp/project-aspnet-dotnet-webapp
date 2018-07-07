@@ -15,7 +15,7 @@ pipeline {
         script{
           def props = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
 
-          echo props.AWSCredentials
+          echo props.AWSBucket
         }
 
         script {
