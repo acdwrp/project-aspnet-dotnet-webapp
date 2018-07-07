@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo 'Testing..'
+        testDotNet()
       }
     }
     stage('Package Artifacts') {
@@ -39,22 +39,22 @@ pipeline {
     stage('Deploy to Test')
     {
         steps{
-          echo "Testing"
+          pushToEnvironment()
         }
     }
     stage('Run smoke tests'){
         steps{
-          echo "Testing"
+          smokeTestEnvironment()
         }
     }
     stage('Run API tests'){
       steps{
-        echo "Testing" 
+        apiTestEnvironment()
       }
     }
     stage('Run stress tests'){
       steps{
-        echo "Testing"
+        stressTestEnvironment()
       }
     }
   }
