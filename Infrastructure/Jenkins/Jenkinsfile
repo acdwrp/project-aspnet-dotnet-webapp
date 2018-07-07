@@ -12,6 +12,12 @@ pipeline {
 
 echo "Test"
 
+        script{
+          def props = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
+
+          echo props.AWSCredentials
+        }
+
         script {
           def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
           authors.each {println "RPM:  ${it}"}
@@ -41,6 +47,9 @@ echo "Test"
         echo "DDD"
 
         deployToS3 file: "AAA"
+
+        AwsDeploymentPackage.TestString = "A"
+        AwsDeploymentPackage.TestValue = 
 
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
