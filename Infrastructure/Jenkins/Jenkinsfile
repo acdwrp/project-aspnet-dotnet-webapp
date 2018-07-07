@@ -10,21 +10,12 @@ pipeline {
     stage('Build') { 
       steps {
 
-        echo "Test"
-
         script{
           DepolymentProperties = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
         }
 
-        
-
-        script {
-          def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
-          authors.each {println "RPM:  ${it}"}
-        }
-
-        bat "nuget restore ${SolutionName}"
-        bat "\"${tool 'MSBuild'}\" ${SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+        bat "nuget restore ${DepolymentProperties.SolutionName}"
+        bat "\"${tool 'MSBuild'}\" ${DepolymentProperties.SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
     stage('Test') {
@@ -45,8 +36,6 @@ pipeline {
       steps {
 
         echo "DDD"
-
-        echo DepolymentProperties.AWSBucket
 
         deployToS3 file: "AAA" 
 
