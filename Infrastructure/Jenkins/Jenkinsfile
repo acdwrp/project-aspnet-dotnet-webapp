@@ -40,7 +40,9 @@ echo "Test"
 
         echo "DDD"
 
+script{
 deployToS3 file: "AAA"
+}
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
