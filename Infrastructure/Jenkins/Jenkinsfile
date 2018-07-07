@@ -10,15 +10,8 @@ pipeline {
     stage('Build') { 
       steps {
 
+        buildDotNet()
 
-echo "A"
-        
-        script{
-          DeploymentProperties = readJSON file: ConfigLocation
-        }
-
-        bat "nuget restore ${DeploymentProperties.SolutionName}"
-        bat "\"${tool 'MSBuild'}\" ${DeploymentProperties.SolutionName} /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
     stage('Test') {
@@ -28,8 +21,9 @@ echo "A"
     }
     stage('Package Artifacts') {
       steps {
-        zip(glob: DeploymentProperties.ArtifactsToPack, zipFile: DeploymentProperties.ZipPackageName)
-        archiveArtifacts(artifacts: DeploymentProperties.ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
+
+        archivePackage()
+
       }
     }
     stage('Push to artifact storage') {
@@ -66,9 +60,7 @@ echo "A"
   }
   environment {
     WorkspaceName = JOB_NAME.replace("%2F", "_")
-    ABC = "WWW"
     ConfigLocation = "Infrastructure/Jenkins/DeploymentConfig.json"
-    DeploymentProperties = "QQQ"
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
