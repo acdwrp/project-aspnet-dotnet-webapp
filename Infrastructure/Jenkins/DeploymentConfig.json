@@ -1,0 +1,10 @@
+{
+    "SolutionName" : "SampleWebApplication.sln",
+    "ArtifactsToPack" : "/SampleWebApplication/bin/*.*",
+
+    "AWSBucket" : "test.sample.internal.depolyment",
+    "AWSCredentials" : "AWSCredentials",
+
+    "StashedPackage" : "Package",
+    "ZipPackageName" : "package.zip"
+}
