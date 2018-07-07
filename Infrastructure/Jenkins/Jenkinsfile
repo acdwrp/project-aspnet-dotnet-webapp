@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
-        echo "B"
+        echo "Starting build process"
         script{
           buildDotNet()
         }
@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "B"
+        echo "Starting test process"
         script{
           testDotNet()
         }
@@ -26,7 +26,7 @@ pipeline {
     stage('Package Artifacts') {
       steps {
         script{
-          echo "B"
+          echo "Starting packaging of the artifacts"
           archivePackage()
         }
       }
@@ -37,7 +37,7 @@ pipeline {
       }
       steps {
         script{
-          echo "B"
+          echo "Starting artifact upload"
           deployToS3()
         }
 
@@ -47,7 +47,7 @@ pipeline {
     {
         steps{
           script{
-            echo "B"
+            echo "Starting deployment to Test environment"
             pushToEnvironment()
           }
         }
@@ -55,7 +55,7 @@ pipeline {
     stage('Run smoke tests'){
         steps{
           script{
-            echo "B"
+            echo "Starting smoke tests"
             smokeTestEnvironment()
           }
         }
@@ -63,7 +63,7 @@ pipeline {
     stage('Run API tests'){
       steps{
         script{
-          echo "B"
+          echo "Starting API tests"
           apiTestEnvironment()
         }
       }
@@ -71,7 +71,7 @@ pipeline {
     stage('Run stress tests'){
       steps{
         script{
-          echo "B"
+          echo "Starting stress tests"
           stressTestEnvironment()
         }
       }
