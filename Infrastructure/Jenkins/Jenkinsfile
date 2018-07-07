@@ -10,7 +10,7 @@ pipeline {
     stage('Build') { 
       steps {
 
-        wnmp file: "A"
+        
         
         script{
           DeploymentProperties = readJSON file: ConfigLocation
