@@ -41,7 +41,7 @@ echo "Test"
         echo "DDD"
 
 script{
-deployToS3(file: "AAA")
+detest(file: "AAA")
 }
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
