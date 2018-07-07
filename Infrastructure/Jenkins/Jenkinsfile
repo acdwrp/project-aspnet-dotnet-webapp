@@ -14,9 +14,9 @@ pipeline {
 
         script{
           def props = readJSON file: "Infrastructure/Jenkins/DeploymentConfig.json"
-
-          echo props.AWSBucket
         }
+
+        echo DepolymentProperties.AWSBucket
 
         script {
           def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
