@@ -12,7 +12,7 @@ pipeline {
 
 
 echo "A"
-        wnmp
+        wnmp()
         
         script{
           DeploymentProperties = readJSON file: ConfigLocation
