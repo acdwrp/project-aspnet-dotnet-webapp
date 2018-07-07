@@ -25,8 +25,8 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
+        echo "Starting packaging of the artifacts"
         script{
-          echo "Starting packaging of the artifacts"
           archivePackage()
         }
       }
@@ -36,8 +36,8 @@ pipeline {
         branch 'master'
       }
       steps {
+        echo "Starting artifact upload"
         script{
-          echo "Starting artifact upload"
           deployToS3()
         }
 
@@ -46,32 +46,32 @@ pipeline {
     stage('Deploy to Test')
     {
         steps{
+          echo "Starting deployment to Test environment"
           script{
-            echo "Starting deployment to Test environment"
             pushToEnvironment()
           }
         }
     }
     stage('Run smoke tests'){
         steps{
+          echo "Starting smoke tests"
           script{
-            echo "Starting smoke tests"
             smokeTestEnvironment()
           }
         }
     }
     stage('Run API tests'){
       steps{
+        echo "Starting API tests"
         script{
-          echo "Starting API tests"
           apiTestEnvironment()
         }
       }
     }
     stage('Run stress tests'){
       steps{
+        echo "Starting stress tests"
         script{
-          echo "Starting stress tests"
           stressTestEnvironment()
         }
       }
