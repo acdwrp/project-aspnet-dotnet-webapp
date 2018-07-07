@@ -37,7 +37,7 @@ pipeline {
 
         echo "DDD"
 
-        wnmp "AAA"
+        wnmp file: "AAA"
 
       }
     }
