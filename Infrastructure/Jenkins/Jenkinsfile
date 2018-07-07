@@ -12,7 +12,6 @@ pipeline {
 
 
 echo "A"
-        wnmp()
         
         script{
           DeploymentProperties = readJSON file: ConfigLocation
@@ -39,7 +38,7 @@ echo "A"
       }
       steps {
 
-        echo "DDD"
+        deployToS3()
 
       }
     }
