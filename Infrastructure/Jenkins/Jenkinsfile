@@ -25,8 +25,8 @@ pipeline {
     }
     stage('Package Artifacts') {
       steps {
-        zip(glob: ArtifactsToPack, zipFile: ZipPackageName)
-        archiveArtifacts(artifacts: ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
+        zip(glob: DepolymentProperties.ArtifactsToPack, zipFile: DepolymentProperties.ZipPackageName)
+        archiveArtifacts(artifacts: DepolymentProperties.ZipPackageName, onlyIfSuccessful: true, fingerprint: true)
       }
     }
     stage('Push to artifact storage') {
@@ -39,49 +39,32 @@ pipeline {
 
         deployToS3 file: "AAA" 
 
-
-        withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
-          timeout(time: 3, unit: 'MINUTES') {
-            retry(count: 5) {
-              s3Upload(file: ZipPackageName, bucket: AWSBucket, path: "${WorkspaceName}/${ZipPackageName}")
-            }
-
-          }
-
-        }
-
       }
     }
     stage('Deploy to Test')
     {
-steps{
-echo "Testing"
-}
+        steps{
+          echo "Testing"
+        }
     }
     stage('Run smoke tests'){
-steps{
-  echo "Testing"
-}
+        steps{
+          echo "Testing"
+        }
     }
     stage('Run API tests'){
-steps{
- echo "Testing" 
-}
+      steps{
+        echo "Testing" 
+      }
     }
     stage('Run stress tests'){
-steps{
-  echo "Testing"
-}
+      steps{
+        echo "Testing"
+      }
     }
   }
   environment {
-    AWSBucket = 'test.sample.internal.depolyment'
-    AWSCredentials = 'AWSCredentials'
-    StashedPackage = 'Package'
-    ZipPackageName = 'package.zip'
     WorkspaceName = JOB_NAME.replace("%2F", "_")
-    SolutionName = 'SampleWebApplication.sln'
-    ArtifactsToPack = '/SampleWebApplication/bin/*.*'
     DepolymentProperties = ""
   }
   options {
