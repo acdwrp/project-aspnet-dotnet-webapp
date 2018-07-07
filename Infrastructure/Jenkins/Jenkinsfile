@@ -10,8 +10,6 @@ pipeline {
     stage('Build') { 
       steps {
 
-deployToS3 "AWSBucket"
-
         script {
           def authors = currentBuild.changeSets.collectMany { it.toList().collect { it.author } }.unique()
           authors.each {println "RPM:  ${it}"}
@@ -36,6 +34,9 @@ deployToS3 "AWSBucket"
       when {
         branch 'master'
       }
+
+deployToS3 file: ZipPackageName, bucket: AWSBucket, bucketPath: "${WorkspaceName}/${ZipPackageName}"
+
       steps {
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
           timeout(time: 3, unit: 'MINUTES') {
