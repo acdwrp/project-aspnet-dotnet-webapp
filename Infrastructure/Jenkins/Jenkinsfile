@@ -9,6 +9,7 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
+        echo "B"
         script{
           buildDotNet()
         }
@@ -16,6 +17,7 @@ pipeline {
     }
     stage('Test') {
       steps {
+        echo "B"
         script{
           testDotNet()
         }
@@ -24,6 +26,7 @@ pipeline {
     stage('Package Artifacts') {
       steps {
         script{
+          echo "B"
           archivePackage()
         }
       }
@@ -34,6 +37,7 @@ pipeline {
       }
       steps {
         script{
+          echo "B"
           deployToS3()
         }
 
@@ -43,6 +47,7 @@ pipeline {
     {
         steps{
           script{
+            echo "B"
             pushToEnvironment()
           }
         }
@@ -50,6 +55,7 @@ pipeline {
     stage('Run smoke tests'){
         steps{
           script{
+            echo "B"
             smokeTestEnvironment()
           }
         }
@@ -57,6 +63,7 @@ pipeline {
     stage('Run API tests'){
       steps{
         script{
+          echo "B"
           apiTestEnvironment()
         }
       }
@@ -64,6 +71,7 @@ pipeline {
     stage('Run stress tests'){
       steps{
         script{
+          echo "B"
           stressTestEnvironment()
         }
       }
