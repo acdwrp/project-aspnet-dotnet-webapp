@@ -46,10 +46,7 @@ pipeline {
 
         echo "DDD"
 
-        deployToS3 file: "AAA"
-
-        AwsDeploymentPackage.TestString = "A"
-        AwsDeploymentPackage.TestValue = 
+        deployToS3 file: "AAA" 
 
 
         withAWS(credentials: 'AWSCredentials', region: 'eu-west-1') {
