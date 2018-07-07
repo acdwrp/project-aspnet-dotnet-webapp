@@ -37,7 +37,7 @@ pipeline {
 
         echo "DDD"
 
-        deployToS3 file: "AAA" 
+        test 
 
       }
     }
@@ -65,6 +65,7 @@ pipeline {
   }
   environment {
     WorkspaceName = JOB_NAME.replace("%2F", "_")
+    ABC = "WWW"
     DepolymentProperties = ""
   }
   options {
