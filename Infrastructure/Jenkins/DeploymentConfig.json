@@ -11,8 +11,8 @@
             "/SampleWebApplication/Content/*",
             "/SampleWebApplication/Scripts/*",
             "/SampleWebApplication/Views/*",
-            "SampleWebApplication/Global.asax",
-            "./SampleWebApplication/packages.config"
+            "SampleWebApplication/Global.asax/",
+            "/SampleWebApplication/packages.config/"
         ]
     },
 
