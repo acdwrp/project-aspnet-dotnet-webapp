@@ -52,7 +52,7 @@ pipeline {
           }
         }
     }
-    stage('Run smoke tests'){
+    stage('Run smoke tests in Test'){
         steps{
           echo "Starting smoke tests"
           script{
@@ -75,6 +75,40 @@ pipeline {
           stressTestEnvironment()
         }
       }
+    }
+    stage('Deploy to Staging')
+    {
+        steps{
+          echo "Starting deployment to Test environment"
+          script{
+            pushToEnvironment()
+          }
+        }
+    }
+    stage('Run smoke tests in Staging'){
+        steps{
+          echo "Starting smoke tests"
+          script{
+            smokeTestEnvironment()
+          }
+        }
+    }
+    stage('Deploy to Production')
+    {
+        steps{
+          echo "Starting deployment to Test environment"
+          script{
+            pushToEnvironment()
+          }
+        }
+    }
+    stage('Run smoke tests Production'){
+        steps{
+          echo "Starting smoke tests"
+          script{
+            smokeTestEnvironment()
+          }
+        }
     }
   }
   environment {
