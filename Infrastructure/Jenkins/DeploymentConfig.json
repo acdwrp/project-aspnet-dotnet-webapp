@@ -6,11 +6,11 @@
     {
         "Includes" : 
         [
-            "/SampleWebApplication/bin",
-            "/SampleWebApplication/assets",
-            "/SampleWebApplication/Content",
-            "/SampleWebApplication/Scripts",
-            "/SampleWebApplication/Views",
+            "/SampleWebApplication/bin/*",
+            "/SampleWebApplication/assets/*",
+            "/SampleWebApplication/Content/*",
+            "/SampleWebApplication/Scripts/*",
+            "/SampleWebApplication/Views/*",
             "/SampleWebApplication/Global.asax",
             "/SampleWebApplication/packages.config"
         ]
