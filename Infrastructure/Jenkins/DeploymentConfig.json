@@ -2,6 +2,18 @@
     "SolutionName" : "SampleWebApplication.sln",
     "ArtifactsToPack" : "/SampleWebApplication/bin/*.*",
 
+    "Artifacts" :
+    {
+        "Includes" : 
+        [
+            "/SampleWebApplication/bin/*.*",
+            "/SampleWebApplication/bin/*.*",
+            "/SampleWebApplication/bin/*.*",
+            "/SampleWebApplication/bin/*.*",
+            "/SampleWebApplication/bin/*.*"
+        ]
+    },
+
     "AWSBucket" : "test.sample.internal.depolyment",
     "AWSCredentials" : "AWSCredentials",
     "AWSRegion" : "eu-west-1",
