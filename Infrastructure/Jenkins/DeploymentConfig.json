@@ -16,7 +16,7 @@
             "/SampleWebApplication/Views/*",
             "/SampleWebApplication/Global.asax*",
             "/SampleWebApplication/packages.config*",
-            "/SampleWebApplication/web.config*"
+            "/SampleWebApplication/Web.config*"
         ]
     },
 
