@@ -7,12 +7,16 @@
         "Includes" : 
         [
             "/SampleWebApplication/bin/*",
+            "/SampleWebApplication/app_code/*",
+            "/SampleWebApplication/areas/*",
             "/SampleWebApplication/assets/*",
             "/SampleWebApplication/Content/*",
             "/SampleWebApplication/Scripts/*",
+            "/SampleWebApplication/Servcies/*",
+            "/SampleWebApplication/Service References/*",
             "/SampleWebApplication/Views/*",
-            "SampleWebApplication/Global.asax/*",
-            "/SampleWebApplication/packages.config/*"
+            "/SampleWebApplication/Global.asax*",
+            "/SampleWebApplication/packages.config*"
         ]
     },
 
