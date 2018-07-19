@@ -48,7 +48,7 @@ pipeline {
         steps{
           echo "Starting deployment to Test environment"
           script{
-            pushToEnvironment()
+            pushToEnvironment(environment: "Test")
           }
         }
     }
@@ -81,7 +81,7 @@ pipeline {
         steps{
           echo "Starting deployment to Test environment"
           script{
-            pushToEnvironment()
+            pushToEnvironment(environment: "Staging")
           }
         }
     }
@@ -96,9 +96,9 @@ pipeline {
     stage('Deploy to Production')
     {
         steps{
-          echo "Starting deployment to Test environment"
+          echo "Starting deployment to Production environment"
           script{
-            pushToEnvironment()
+            pushToEnvironment(environment: "Production")
           }
         }
     }
