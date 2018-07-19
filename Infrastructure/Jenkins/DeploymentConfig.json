@@ -1,6 +1,5 @@
 {
     "SolutionName" : "SampleWebApplication.sln",
-    "ArtifactsToPack" : "/SampleWebApplication/bin/*.*",
 
     "Artifacts" :
     {
@@ -16,7 +15,8 @@
             "/SampleWebApplication/Service References/*",
             "/SampleWebApplication/Views/*",
             "/SampleWebApplication/Global.asax*",
-            "/SampleWebApplication/packages.config*"
+            "/SampleWebApplication/packages.config*",
+            "/SampleWebApplication/web.config*"
         ]
     },
 
